@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    header {
+      background-color: #666;
+      padding: 30px;
+      text-align: center;
+      font-size: 35px;
+      color: blue;
+    }
+    nav {
+      float: left;
+      width: 30%;
+      background: #ccc;
+      padding: 20px;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    information {
+      float: left;
+      padding: 20px;
+      width: 70%;
+      background-color: #f1f1f1;
+    }
+    section::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    footer {
+      background-color: #777;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
+    /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+    @media (max-width: 600px) {
+      nav, article {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
   <head>
     <title>Renzel's Coding Space</title>
   </head>
   <body>
-    <h1>Renzel Aronne Galvez</h1>
-    <p>Hi, my name is Renzel Aronne Galvez.</p>
-    <p>I am a graduate from the <a href="https://www.usfca.edu/">University of San Francisco</a></p>
-    <p>I am 25 years old</p>
-    <a href="https://docs.google.com/document/d/1VwA2d1Q0DCzyT3KHoj7GbJ6yK15Zq13lnVWdj5mVj4g/edit?usp=sharing">Resume</a>
+    <header>
+      <h1>Renzel Aronne Galvez</h1>
+    </header>
+    <section>
+      <nav>
+        <ul>
+          <h1>Programming Languages</h1>
+          <li>Python</li>
+          <li>Javascript</li>
+          <li>Java</li>
+          <li>HTML</li>
+          <li>C</li>
+        </ul>
+      </nav>
+      <article>
+        <p>Hi, my name is Renzel Aronne Galvez.</p>
+        <p>I am a graduate from the <a href="https://www.usfca.edu/">University of San Francisco</a></p>
+        <p>I am 25 years old</p>
+        <a href="https://docs.google.com/document/d/1VwA2d1Q0DCzyT3KHoj7GbJ6yK15Zq13lnVWdj5mVj4g/edit?usp=sharing">Resume</a>
+      </article>
+    </section>
+    <footer>
+      <h2>END OF SITE</h2>
+    </footer>
   </body>
 </html>
