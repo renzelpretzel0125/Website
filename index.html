@@ -1,106 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renzel's Coding Space</title>
+
   <style>
     * {
       box-sizing: border-box;
-    }
-    h1{
-      font-family:Times New Roman;
-    }
-    header {
-      background-color: #001292;
-      padding: 30px;
-      text-align: center;
-      font-size: 35px;
-      color: white;
-    }
-    nav {
-      float: left;
-      width: 20%;
-      background: #00ecff;
-      padding: 20px;
-    }
-    nav ul {
-      list-style-type: none;
       padding: 0;
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    information {
-      float: left;
-      padding: 20px;
-      width: 70%;
-      background-color: #ffffff;
+
+    body {
+      background: #f6f8ff;
+      color: #1c1c1c;
+      line-height: 1.6;
     }
-    section {
-      display:flex;
-    }
-    section::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    section::before {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    footer {
-      background-color: #001292;
-      padding: 10px;
-      text-align: center;
+
+    /* ---------- Header ---------- */
+    header {
+      background: linear-gradient(135deg, #001292, #3655ff);
       color: white;
+      text-align: center;
+      padding: 50px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 48px;
+      letter-spacing: 1px;
+    }
+
+    /* ---------- Layout Grid ---------- */
+    .container {
+      display: flex;
+      margin: 30px;
+      gap: 25px;
+    }
+
+    /* ---------- Sidebar ---------- */
+    nav {
+      width: 22%;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    nav h3 {
+      margin-bottom: 8px;
+      color: #001292;
+      font-size: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    nav li {
+      padding: 6px 0;
+      font-size: 17px;
+    }
+
+    nav a {
+      color: #001292;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Main Content ---------- */
+    main {
+      flex: 1;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    main h2 {
+      color: #001292;
+      margin-bottom: 12px;
+      font-size: 28px;
+    }
+
+    main h3 {
+      color: #001292;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    main ul {
+      margin: 10px 0 20px 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      background: #001292;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+    }
+
+    /* ---------- Responsive Design ---------- */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+      }
     }
   </style>
-  <head>
-    <title>Renzel's Coding Space</title>
-  </head>
-  <body>
-    <header>
-      <h1>Renzel Aronne Galve</h1>
-    </header>
-    <section>
-      <nav>
-        <ul>
-          <h4>Programming Languages</h1>
-          <li>Python</li>
-          <li>Javascript</li>
-          <li>Java</li>
-          <li>HTML</li>
-          <li>C</li>
-          <li>React</li>
-          <li>Linux</li>
-          <h4>Projects</h1>
-          <li><a href="https://docs.google.com/document/d/1hSJBmna1TKn4qOGOBeaIpwITfCaURDcykh2YYW7Gh8s/edit?usp=sharing">Telemetry8</a></li>
-          <li><a href="https://jlazaro2.github.io/moti-video/?fbclid=IwZXh0bgNhZW0CMTEAAR2wXQZF2s6zQFOkeGOXJWLYtjIi9C3t5oe5j1a9s1eyWkgro8rbmZTcTtI_aem_q3nR5X6GaaWAXk9mC1S5OA">MotiVideo</a></li>
-          <li><a href="https://docs.google.com/document/d/1s3rzIv9Os4IM5ZUCWIv2BRX8PNNFzGwscGR-mKxjGUg/edit?usp=sharing">The Sky Labyrinth and the 7 Swords</a></li>
-        </ul>
-      </nav>
-      <information>
-        <p>Hi, my name is Renzel Aronne Galvez.</p>
-        <p>I am a graduate from the <a href="https://www.usfca.edu/">University of San Francisco</a> in 2023. I studied in the major of Computer Science</p>
-        <p>I am 25 years old, born in January 25, 2000</p>
-        <p>Click <a href="https://docs.google.com/document/d/1Wf1q3B9W6D5xPRRAW1a27rUKeghpDRbqTkcAWIqLY1o/edit?usp=sharing">here</a> to see my resume</p>
-        <h4>My hobbies include:</h4>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Renzel Aronne Galvez</h1>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="container">
+
+    <!-- Sidebar -->
+    <nav>
+      <h3>Programming Languages</h3>
+      <ul>
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li>Java</li>
+        <li>HTML</li>
+        <li>C</li>
+        <li>React</li>
+        <li>Linux</li>
+      </ul>
+
+      <h3>Projects</h3>
+      <ul>
+        <li><a href="https://docs.google.com/document/d/1hSJBmna1TKn4qOGOBeaIpwITfCaURDcykh2YYW7Gh8s/edit?usp=sharing">Telemetry8</a></li>
+        <li><a href="https://jlazaro2.github.io/moti-video/">MotiVideo</a></li>
+        <li><a href="https://docs.google.com/document/d/1s3rzIv9Os4IM5ZUCWIv2BRX8PNNFzGwscGR-mKxjGUg/edit?usp=sharing">The Sky Labyrinth and the 7 Swords</a></li>
+      </ul>
+    </nav>
+
+    <!-- Content -->
+    <main>
+      <h2>About Me</h2>
+      <p>Hi, my name is <strong>Renzel Aronne Galvez</strong>.</p>
+      <p>I graduated from the <a href="https://www.usfca.edu/" style="color:#001292; font-weight:bold;">University of San Francisco</a> in 2023 with a degree in Computer Science.</p>
+      <p>I am 25 years old, born January 25, 2000.</p>
+      <p>View my resume <a href="https://docs.google.com/document/d/1Wf1q3B9W6D5xPRRAW1a27rUKeghpDRbqTkcAWIqLY1o/edit?usp=sharing" style="color:#001292; font-weight:600;">here</a>.</p>
+
+      <h3>Hobbies</h3>
+      <ul>
         <li>Watching anime, kdramas, horror films</li>
-        <li>Listening to anime ost, kpop, ballad, and r&b</li>
+        <li>Listening to anime OST, kpop, ballad, and R&B</li>
         <li>Taking nature walks, hikes, and strolls</li>
-        <li>Reading light novels, manga, and fan fictions</li>
-        <p>I have qualification experience in the Computer Science and technological field as a Coding instructor.</p> 
-        <h4>The following summary of my qualifications from my work experience as a Coding Instructor in The Coder School in San Francisco are the following:</h4> 
-        <li>Helping students to develop and explore fundamental concepts.</li>
-        <li>Developing general problem solving skills.</li>
-        <li>Collaboration through teamwork.</li>
-        <li>Encouraging creativity.</li>
-        <li>Enhancing logical thinking skills.</li>
-        <li>Building confidence for students in coding, problem-solving, and analyzing using Scratch, Javascript, and Python.</li>
-        <li>Analyzing and debugging student code, entering a step by step analyzed explanation.</li> 
-        <li>Grading student progress, provide feedback, and adjust teaching methods based on need.</li>
-        <p>In addition, I have worked on various projects throughout the semesters at my university, and personal projects of my own.</p>
-        
-      </information>
-    </section>
-    <footer>
-      <h2>END OF SITE ;D</h2>
-    </footer>
-  </body>
+        <li>Reading light novels, manga, and fan fiction</li>
+      </ul>
+
+      <h3>Professional Experience</h3>
+      <p>I have experience as a Coding Instructor at The Coder School in San Francisco, where I taught students of various ages and skill levels.</p>
+
+      <ul>
+        <li>Teaching fundamental programming concepts</li>
+        <li>Developing problem-solving and logical thinking skills</li>
+        <li>Encouraging teamwork and creativity</li>
+        <li>Building confidence in Scratch, JavaScript, and Python</li>
+        <li>Debugging student code with detailed, step-by-step explanations</li>
+        <li>Providing feedback and adapting lessons to student needs</li>
+      </ul>
+
+      <p>I have also completed numerous academic and personal programming projects.</p>
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    END OF SITE ;D
+  </footer>
+
+</body>
 </html>
