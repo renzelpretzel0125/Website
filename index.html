@@ -13,6 +13,10 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    .tabcontent {
+      display: none;
+    }
+
     body {
       background: #f6f8ff;
       color: #1c1c1c;
@@ -101,6 +105,10 @@
       margin: 10px 0 20px 20px;
     }
 
+    ul {
+      list-style-type: none;
+    }
+
     li {
       margin-bottom: 6px;
     }
@@ -135,14 +143,15 @@
 
     <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'Work Experience')">Work Experience</button>
-      <button class="tablinks" onclick="openTab(event, 'Volunteer Experience')">Volunteer Experience</button>
-      <button class="tablinks" onclick="openTab(event, 'Countries Visited')">Countries Visited</button>
+      <button type="button" class="tablinks" onclick="openTab(event, 'Work Experience')">Work Experience</button>
+      <button type="button" class="tablinks" onclick="openTab(event, 'Volunteer Experience')">Volunteer Experience</button>
+      <button type="button" class="tablinks" onclick="openTab(event, 'Countries Visited')">Countries Visited</button>
     </div>
 
     <!-- Tab content -->
     <div id="Work Experience" class="tabcontent">
       <h3>Work Experience:</h3>
+      <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
       <ul>
         <li>Amazon Shopper 2019-2021</li>
         <li>TheCoderSchool Coding Instructor 2023-Present</li>
@@ -151,6 +160,7 @@
 
     <div id="Volunteer Experience" class="tabcontent">
       <h3>Volunteer Experience:</h3>
+      <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
       <ul>
         <li>SF Marin Foodbank</li>
         <li>Heart in Motion</li>
@@ -160,6 +170,7 @@
 
     <div id="Countries Visited" class="tabcontent">
       <h3>Countries Visited:</h3>
+      <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
       <ul>
         <li>Canada</li>
         <li>Philippines</li>
@@ -172,6 +183,8 @@
     
     <script>
       function openTab(evt, tabName) {
+        evt.preventDefault(); // stops any default navigation
+
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -184,9 +197,8 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
       }
-
-      // Get the element with id="defaultOpen" and click on it
-      document.getElementById("defaultOpen").click();
+  
+      
     </script>
   </header>
 
