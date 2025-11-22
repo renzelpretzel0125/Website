@@ -132,6 +132,73 @@
         width: 100%;
       }
     }
+
+    /* ----- Modern Tabs Style ----- */
+    .tab {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .tablinks {
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* Hover Glow */
+    .tablinks:hover {
+      background: rgba(255,255,255,0.28);
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,255,255,0.35);
+    }
+
+    /* Active Tab */
+    .tablinks.active {
+      background: white;
+      color: #001292;
+      border-color: white;
+      box-shadow: 0 4px 14px rgba(255,255,255,0.45);
+    }
+
+    /* Animated tab content box */
+    .tabcontent {
+      animation: fadeIn 0.4s ease;
+      background: white;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 12px;
+      color: #001292;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* Style the close button */
+    .topright {
+      float: right;
+      cursor: pointer;
+      font-size: 28px;
+    }
+
+    .topright:hover {
+      color: rgba(0,0,0,0.1);
+      transform: scale(1.15);
+    }
+
+    /* Smooth fade */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -182,7 +249,12 @@
     </div>
     
     <script>
+      window.onload = function(){
+        document.querySelector(".tablinks").click();
+      };
+
       function openTab(evt, tabName) {
+
         evt.preventDefault(); // stops any default navigation
 
         var i, tabcontent, tablinks;
@@ -198,7 +270,6 @@
         evt.currentTarget.className += " active";
       }
   
-      
     </script>
   </header>
 
