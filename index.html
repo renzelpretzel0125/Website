@@ -184,6 +184,14 @@
 
     /* Style the close button */
     .topright {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #001292;
+      cursor: pointer;
+      transition: 0.2s;
       float: right;
       cursor: pointer;
       font-size: 28px;
@@ -217,8 +225,8 @@
 
     <!-- Tab content -->
     <div id="Work Experience" class="tabcontent">
-      <h3>Work Experience:</h3>
       <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+      <h3>Work Experience:</h3>
       <ul>
         <li>Amazon Shopper 2019-2021</li>
         <li>TheCoderSchool Coding Instructor 2023-Present</li>
@@ -226,8 +234,8 @@
     </div>
 
     <div id="Volunteer Experience" class="tabcontent">
-      <h3>Volunteer Experience:</h3>
       <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+      <h3>Volunteer Experience:</h3>
       <ul>
         <li>SF Marin Foodbank</li>
         <li>Heart in Motion</li>
@@ -236,8 +244,8 @@
     </div>
 
     <div id="Countries Visited" class="tabcontent">
-      <h3>Countries Visited:</h3>
       <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+      <h3>Countries Visited:</h3>
       <ul>
         <li>Canada</li>
         <li>Philippines</li>
@@ -249,10 +257,6 @@
     </div>
     
     <script>
-      window.onload = function(){
-        document.querySelector(".tablinks").click();
-      };
-
       function openTab(evt, tabName) {
 
         evt.preventDefault(); // stops any default navigation
