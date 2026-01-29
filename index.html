@@ -201,6 +201,106 @@
       color: rgba(0,0,0,0.1);
       transform: scale(1.15);
     }
+    
+
+    /* ----- Schedule ------ */
+    .schedule-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .schedule-box input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .schedule-box button {
+      padding: 10px;
+      background: #001292;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .schedule-box button:hover {
+      background: #3655ff;
+    }
+
+    #scheduleList li {
+      background: #f0f3ff;
+      padding: 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .delete-btn {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* ---------- Calendar ---------- */
+    .calendar {
+      max-width: 420px;
+      margin: 0 auto 20px auto;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar-header button {
+      background: #001292;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .calendar-header button:hover {
+      background: #3655ff;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .calendar-grid div {
+      padding: 10px;
+      background: #f0f3ff;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .calendar-grid div:hover {
+      background: #3655ff;
+      color: white;
+    }
+
+    .calendar-grid .active-day {
+      background: #001292;
+      color: white;
+    }
+
+    .calendar-grid .has-event {
+      border: 2px solid #3655ff;
+    }
 
     /* Smooth fade */
     @keyframes fadeIn {
@@ -221,6 +321,7 @@
       <button type="button" class="tablinks" onclick="openTab(event, 'Work Experience')">Work Experience</button>
       <button type="button" class="tablinks" onclick="openTab(event, 'Volunteer Experience')">Volunteer Experience</button>
       <button type="button" class="tablinks" onclick="openTab(event, 'Countries Visited')">Countries Visited</button>
+      <button type="button" class="tablinks" onclick="openTab(event, 'Schedule')">Schedule</button>
     </div>
 
     <!-- Tab content -->
@@ -255,25 +356,148 @@
         <li>Hong Kong</li>
       </ul>
     </div>
+
+    <div id="Schedule" class="tabcontent">
+      <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+      <h3>Schedule</h3>   
+      <div class="calendar">
+        <div class="calendar-header">
+          <button onclick="changeMonth(-1)">&#10094;</button>
+          <h4 id="calendarMonth"></h4>
+          <button onclick="changeMonth(1)">&#10095;</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <div class="schedule-box">
+        <label>
+          Select Date:
+          <input type="date" id="scheduleDate">
+        </label>
+
+        <label>
+          Event / Task:
+          <input type="text" id="scheduleText" placeholder="e.g. Working @ 3pm - 7pm">
+        </label>
+
+        <button onclick="addEvent()">Add to Schedule</button>
+
+        <h4>Events for Selected Date</h4>
+        <ul id="scheduleList"></ul>
+      </div>
+    </div>
     
     <script>
       function openTab(evt, tabName) {
+        evt.preventDefault();
+        const tabcontent = document.getElementsByClassName("tabcontent");
+        const tablinks = document.getElementsByClassName("tablinks");
 
-        evt.preventDefault(); // stops any default navigation
-
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
+        for (let i = 0; i < tabcontent.length; i++) {
           tabcontent[i].style.display = "none";
         }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
+        for (let i = 0; i < tablinks.length; i++) {
           tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
       }
-  
+
+      /* ---------- Schedule + Calendar ---------- */
+      const dateInput = document.getElementById("scheduleDate");
+      const textInput = document.getElementById("scheduleText");
+      const list = document.getElementById("scheduleList");
+      const calendarGrid = document.getElementById("calendarGrid");
+      const calendarMonth = document.getElementById("calendarMonth");
+
+      let currentDate = new Date();
+
+      dateInput.addEventListener("change", loadEvents);
+
+      function addEvent() {
+        const date = dateInput.value;
+        const text = textInput.value.trim();
+        if (!date || !text) return;
+
+        const data = JSON.parse(localStorage.getItem("schedule")) || {};
+        if (!data[date]) data[date] = [];
+        data[date].push(text);
+
+        localStorage.setItem("schedule", JSON.stringify(data));
+        textInput.value = "";
+        loadEvents();
+        renderCalendar();
+      }
+
+      function loadEvents() {
+        list.innerHTML = "";
+        const date = dateInput.value;
+        if (!date) return;
+
+        const data = JSON.parse(localStorage.getItem("schedule")) || {};
+        const events = data[date] || [];
+
+        events.forEach((event, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            ${event}
+            <span class="delete-btn" onclick="deleteEvent('${date}', ${index})">&times;</span>
+          `;
+          list.appendChild(li);
+        });
+      }
+
+      function deleteEvent(date, index) {
+        const data = JSON.parse(localStorage.getItem("schedule"));
+        data[date].splice(index, 1);
+        if (data[date].length === 0) delete data[date];
+        localStorage.setItem("schedule", JSON.stringify(data));
+        loadEvents();
+        renderCalendar();
+      }
+
+      function changeMonth(offset) {
+        currentDate.setMonth(currentDate.getMonth() + offset);
+        renderCalendar();
+      }
+
+      function renderCalendar() {
+        calendarGrid.innerHTML = "";
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        calendarMonth.textContent = currentDate.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric"
+        });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const data = JSON.parse(localStorage.getItem("schedule")) || {};
+
+        for (let i = 0; i < firstDay; i++) {
+          calendarGrid.appendChild(document.createElement("div"));
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const div = document.createElement("div");
+          const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+          div.textContent = day;
+
+          if (data[dateStr]) div.classList.add("has-event");
+          if (dateInput.value === dateStr) div.classList.add("active-day");
+
+          div.onclick = () => {
+            dateInput.value = dateStr;
+            loadEvents();
+            renderCalendar();
+          };
+
+          calendarGrid.appendChild(div);
+        }
+      }
+
+      renderCalendar();
     </script>
   </header>
 
@@ -304,6 +528,7 @@
         <li><a href="https://jlazaro2.github.io/moti-video/">MotiVideo</a></li>
         <li><a href="https://docs.google.com/document/d/1s3rzIv9Os4IM5ZUCWIv2BRX8PNNFzGwscGR-mKxjGUg/edit?usp=sharing">The Sky Labyrinth and the 7 Swords</a></li>
         <li><a href="https://docs.google.com/document/d/1grmjYK5rGzlI7UMjlhSpVl2hg6WoGeei4OrqdVIkyGk/edit?tab=t.0#heading=h.ay42hcjiqxoq">Thunkable Projects</a></li>
+        <li><a href="https://github.com/renzelpretzel0125/Conversation">Conversation AI</a></li>
       </ul>
     </nav>
 
