@@ -307,6 +307,50 @@
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    /* ---------- Mobile Enhancements ---------- */
+    @media (max-width: 600px) {
+      header {
+        padding: 30px 15px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      .tab {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tablinks {
+        font-size: 16px;
+        padding: 10px 14px;
+        flex: 1 1 auto;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      nav {
+        padding: 18px;
+      }
+
+      .calendar,
+      .schedule-box {
+        max-width: 100%;
+      }
+
+      .calendar-grid div {
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      .schedule-box input,
+      .schedule-box button {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 
@@ -388,6 +432,7 @@
     </div>
     
     <script>
+      const SAVED_DATE_KEY = "selectedDate";
       function openTab(evt, tabName) {
         evt.preventDefault();
         const tabcontent = document.getElementsByClassName("tabcontent");
@@ -401,6 +446,16 @@
         }
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
+
+        // To restore schedule state
+        if (tabName === "Schedule") {
+          const savedDate = localStorage.getItem(SAVED_DATE_KEY);
+          if (savedDate) {
+            dateInput.value = savedDate;
+            loadEvents();
+          }
+          renderCalendar();
+        }
       }
 
       /* ---------- Schedule + Calendar ---------- */
@@ -412,7 +467,11 @@
 
       let currentDate = new Date();
 
-      dateInput.addEventListener("change", loadEvents);
+      dateInput.addEventListener("change", () => {
+        localStorage.setItem(SAVED_DATE_KEY,dateInput.value);
+        loadEvents();
+        renderCalendar();
+      });
 
       function addEvent() {
         const date = dateInput.value;
@@ -498,6 +557,11 @@
       }
 
       renderCalendar();
+      const savedDate = localStorage.getItem(SAVED_DATE_KEY);
+      if(savedDate) {
+        dateInput.value = savedDate;
+        loadEvents();
+      }
     </script>
   </header>
 
